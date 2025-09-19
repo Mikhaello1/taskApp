@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { STRINGS } from "../constants/strings";
-import { Task } from "../types";
+
+import { STRINGS } from "@/constants/strings";
+import { Task } from "@/types";
 
 interface UseTaskFormReturn {
     formData: {

@@ -1,11 +1,13 @@
-import { STRINGS } from '@/constants/strings';
-import { Task, TaskStatus } from '@/types';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { getStatusColor } from '../utils/statusColors';
+
+import { STRINGS } from '@/constants/strings';
+import { COLORS } from '@/constants/styles';
 import { commonStyles } from '@/styles/common';
+import { Task, TaskStatus } from '@/types';
+import { getStatusColor } from '@/app/utils/statusColors';
 
 interface TaskItemProps {
   item: Task;
@@ -48,7 +50,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ item, onUpdateStatus, onDele
           <Ionicons 
             name="play-circle" 
             size={24} 
-            color={item.status === STRINGS.STATUS.IN_PROGRESS ? '#CCC' : '#1E90FF'} 
+            color={item.status === STRINGS.STATUS.IN_PROGRESS ? COLORS.GRAY_DISABLED : COLORS.IN_PROGRESS} 
           />
         </TouchableOpacity>
         
@@ -60,7 +62,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ item, onUpdateStatus, onDele
           <Ionicons 
             name="checkmark-circle" 
             size={24} 
-            color={item.status === STRINGS.STATUS.COMPLETED ? '#CCC' : '#32CD32'} 
+            color={item.status === STRINGS.STATUS.COMPLETED ? COLORS.GRAY_DISABLED : COLORS.COMPLETED} 
           />
         </TouchableOpacity>
         
@@ -72,13 +74,13 @@ export const TaskItem: React.FC<TaskItemProps> = ({ item, onUpdateStatus, onDele
           <Ionicons 
             name="close-circle" 
             size={24} 
-            color={item.status === STRINGS.STATUS.CANCELLED ? '#CCC' : '#FF4500'} 
+            color={item.status === STRINGS.STATUS.CANCELLED ? COLORS.GRAY_DISABLED : COLORS.CANCELLED} 
           />
         </TouchableOpacity>
         
         {/* Delete button */}
         <TouchableOpacity onPress={() => onDelete(item.id)}>
-          <Ionicons name="trash" size={24} color="#FF4500" />
+          <Ionicons name="trash" size={24} color={COLORS.ERROR} />
         </TouchableOpacity>
       </View>
     </TouchableOpacity>

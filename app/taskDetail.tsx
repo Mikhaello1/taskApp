@@ -1,6 +1,3 @@
-import { STRINGS } from '@/constants/strings';
-import { COLORS } from '@/constants/styles';
-import { commonStyles } from '@/styles/common';
 import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams } from 'expo-router';
 import React from 'react';
@@ -13,7 +10,11 @@ import {
   View
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { getStatusColor } from './utils/statusColors';
+
+import { getStatusColor } from '@/app/utils/statusColors';
+import { STRINGS } from '@/constants/strings';
+import { COLORS } from '@/constants/styles';
+import { commonStyles } from '@/styles/common';
 
 export default function TaskDetailScreen() {
   const { task } = useLocalSearchParams();

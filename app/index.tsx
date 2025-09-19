@@ -1,16 +1,17 @@
-import { STRINGS } from "@/constants/strings";
-import { commonStyles } from "@/styles/common";
-import { Task } from "@/types";
 import { useFocusEffect } from "expo-router";
 import React, { useCallback, useState } from "react";
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTasks } from "../hooks/useTasks";
-import { useTaskSorting } from "../hooks/useTaskSorting";
-import { EmptyList } from "./components/EmptyList";
-import { Header } from "./components/Header";
-import { SortModal } from "./components/SortModal";
-import { TaskItem } from "./components/TaskItem";
+
+import { EmptyList } from "@/app/components/EmptyList";
+import { Header } from "@/app/components/Header";
+import { SortModal } from "@/app/components/SortModal";
+import { TaskItem } from "@/app/components/TaskItem";
+import { STRINGS } from "@/constants/strings";
+import { useTasks } from "@/hooks/useTasks";
+import { useTaskSorting } from "@/hooks/useTaskSorting";
+import { commonStyles } from "@/styles/common";
+import { Task } from "@/types";
 
 export default function TaskListScreen() {
     const [sortModalVisible, setSortModalVisible] = useState(false);

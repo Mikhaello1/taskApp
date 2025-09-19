@@ -1,6 +1,8 @@
+import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
 import React from 'react';
 import { Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker';
+
+import { COLORS } from '@/constants/styles';
 import { commonStyles } from '@/styles/common';
 
 interface DateTimePickerProps {
@@ -62,7 +64,7 @@ export const DateTimePickerComponent: React.FC<DateTimePickerProps> = ({
     <View style={commonStyles.inputGroup}>
       <Text style={commonStyles.label}>
         {label}
-        {required && <Text style={{ color: '#FF4500' }}> *</Text>}
+        {required && <Text style={{ color: COLORS.ERROR }}> *</Text>}
       </Text>
 
       <View style={styles.dateTimeContainer}>
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     marginBottom: 4,
-    color: '#666',
+    color: COLORS.TEXT_SECONDARY,
   },
   dateTimeContainer: {
     flexDirection: 'row',
@@ -137,9 +139,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   dateTimeInput: {
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.WHITE,
     borderWidth: 1,
-    borderColor: '#DDD',
+    borderColor: COLORS.GRAY_MEDIUM,
     borderRadius: 8,
     padding: 12,
     fontSize: 16,
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
   selectedDateTime: {
     marginTop: 8,
     fontSize: 14,
-    color: '#666',
+    color: COLORS.TEXT_SECONDARY,
     textAlign: 'center',
     fontStyle: 'italic',
   },

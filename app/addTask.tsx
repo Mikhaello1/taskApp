@@ -1,14 +1,15 @@
-import { commonStyles } from "@/styles/common";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Alert, Keyboard, ScrollView, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { STRINGS } from "../constants/strings";
-import { useTaskForm } from "../hooks/useTaskForm";
-import { useTasks } from "../hooks/useTasks";
-import { Button } from "./components/Button";
-import { DateTimePickerComponent } from "./components/DateTimePicker";
-import { FormInput } from "./components/FormInput";
+
+import { Button } from "@/app/components/Button";
+import { DateTimePickerComponent } from "@/app/components/DateTimePicker";
+import { FormInput } from "@/app/components/FormInput";
+import { STRINGS } from "@/constants/strings";
+import { useTaskForm } from "@/hooks/useTaskForm";
+import { useTasks } from "@/hooks/useTasks";
+import { commonStyles } from "@/styles/common";
 
 export default function AddTaskScreen() {
     const router = useRouter();

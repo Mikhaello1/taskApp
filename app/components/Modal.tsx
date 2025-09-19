@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, TouchableWithoutFeedback, View } from 'react-native';
+
 import { commonStyles } from '@/styles/common';
 
 interface ModalProps {

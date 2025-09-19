@@ -1,5 +1,7 @@
 import React from 'react';
 import { Text, TextInput, View } from 'react-native';
+
+import { COLORS } from '@/constants/styles';
 import { commonStyles } from '@/styles/common';
 
 interface FormInputProps {
@@ -29,7 +31,7 @@ export const FormInput: React.FC<FormInputProps> = ({
     <View style={commonStyles.inputGroup}>
       <Text style={commonStyles.label}>
         {label}
-        {required && <Text style={{ color: '#FF4500' }}> *</Text>}
+        {required && <Text style={{ color: COLORS.ERROR }}> *</Text>}
       </Text>
       <TextInput
         style={[

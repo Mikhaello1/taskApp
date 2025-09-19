@@ -1,5 +1,7 @@
 import React from 'react';
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, ViewStyle } from 'react-native';
+
+import { COLORS } from '@/constants/styles';
 import { commonStyles } from '@/styles/common';
 
 interface ButtonProps {
@@ -43,7 +45,7 @@ export const Button: React.FC<ButtonProps> = ({
       activeOpacity={0.7}
     >
       {loading ? (
-        <ActivityIndicator color={variant === 'primary' ? '#FFF' : '#4CAF50'} />
+        <ActivityIndicator color={variant === 'primary' ? COLORS.WHITE : COLORS.PRIMARY} />
       ) : (
         <Text style={textStyle}>{title}</Text>
       )}
@@ -53,15 +55,15 @@ export const Button: React.FC<ButtonProps> = ({
 
 const styles = StyleSheet.create({
   primary: {
-    backgroundColor: '#4CAF50',
+    backgroundColor: COLORS.PRIMARY,
   },
   secondary: {
-    backgroundColor: '#FFF',
+    backgroundColor: COLORS.WHITE,
     borderWidth: 1,
-    borderColor: '#4CAF50',
+    borderColor: COLORS.PRIMARY,
   },
   danger: {
-    backgroundColor: '#FF4500',
+    backgroundColor: COLORS.ERROR,
   },
   small: {
     paddingVertical: 8,
@@ -76,19 +78,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   disabled: {
-    backgroundColor: '#CCC',
-    borderColor: '#CCC',
+    backgroundColor: COLORS.GRAY_DISABLED,
+    borderColor: COLORS.GRAY_DISABLED,
   },
   primaryText: {
-    color: '#FFF',
+    color: COLORS.WHITE,
   },
   secondaryText: {
-    color: '#4CAF50',
+    color: COLORS.PRIMARY,
   },
   dangerText: {
-    color: '#FFF',
+    color: COLORS.WHITE,
   },
   disabledText: {
-    color: '#999',
+    color: COLORS.TEXT_LIGHT,
   },
 });

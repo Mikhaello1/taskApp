@@ -1,9 +1,11 @@
-import { STRINGS } from '@/constants/strings';
-import { commonStyles } from '@/styles/common';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { ModalComponent } from './Modal';
+import { Text, TouchableOpacity } from 'react-native';
+
+import { ModalComponent } from '@/app/components/Modal';
+import { STRINGS } from '@/constants/strings';
+import { COLORS } from '@/constants/styles';
+import { commonStyles } from '@/styles/common';
 
 interface SortModalProps {
   visible: boolean;
@@ -38,9 +40,9 @@ export const SortModal: React.FC<SortModalProps> = ({
           <Ionicons 
             name={sortBy === sortKey ? 'radio-button-on' : 'radio-button-off'} 
             size={24} 
-            color="#333" 
+            color={COLORS.TEXT_PRIMARY} 
           />
-          <Text style={{ marginLeft: 12, fontSize: 16, color: '#333' }}>{label}</Text>
+          <Text style={{ marginLeft: 12, fontSize: 16, color: COLORS.TEXT_PRIMARY }}>{label}</Text>
         </TouchableOpacity>
       ))}
     </ModalComponent>

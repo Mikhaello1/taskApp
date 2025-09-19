@@ -1,8 +1,9 @@
-import { COLORS, ICON_SIZE } from '@/constants/styles';
-import { commonStyles } from '@/styles/common';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, View } from 'react-native';
+
+import { COLORS, ICON_SIZE } from '@/constants/styles';
+import { commonStyles } from '@/styles/common';
 
 interface EmptyListProps {
   icon?: string;
