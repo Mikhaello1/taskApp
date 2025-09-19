@@ -16,17 +16,16 @@ export const STRINGS = {
         CREATED_AT: "Created At",
     },
     TASK_LIST: {
-        TITLE: "Field Tasks",
         EMPTY_TITLE: "No tasks yet",
         EMPTY_SUBTITLE: "Add a new task to get started",
         DELETE_TITLE: "Delete Task",
         DELETE_MESSAGE: "Are you sure you want to delete this task?",
     },
     TASK_FORM: {
-        TITLE: "Task Title *",
-        DESCRIPTION: "Description *",
-        ADDRESS: "Address *",
-        DATE_TIME: "Date and Time of Execution *",
+        TITLE: "Task Title",
+        DESCRIPTION: "Description",
+        ADDRESS: "Address",
+        DATE_TIME: "Date and Time of Execution",
         TITLE_REQUIRED: "Task title is required",
         DESCRIPTION_REQUIRED: "Task description is required",
         ADDRESS_REQUIRED: "Address is required",
@@ -51,7 +50,7 @@ export const STRINGS = {
     },
     SORT_BY: {
         DATE_ADDED: "dateAdded",
-        STATUS: "status"
+        STATUS: "status",
     },
     STATUS_ORDER: {
         PENDING: 0,
@@ -70,6 +69,6 @@ export const STRINGS = {
         SUBTITLE: "Add a new task to get started",
     },
     HEADER: {
-        TITLE: "Field Tasks",
+        TITLE: "Tasks",
     },
 };

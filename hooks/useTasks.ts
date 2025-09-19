@@ -17,6 +17,8 @@ export const useTasks = () => {
       const storedTasks = await AsyncStorage.getItem(STORAGE_KEY);
       if (storedTasks) {
         setTasks(JSON.parse(storedTasks));
+      } else {
+        setTasks([]); 
       }
     } catch (error) {
       Alert.alert(STRINGS.COMMON.ERROR, STRINGS.ERRORS.LOAD_TASKS);
@@ -36,34 +38,44 @@ export const useTasks = () => {
 
   const addTask = useCallback(async (newTask: Task) => {
     try {
-      const updatedTasks = [...tasks, newTask];
+
+      const storedTasks = await AsyncStorage.getItem(STORAGE_KEY);
+      const currentTasks = storedTasks ? JSON.parse(storedTasks) : [];
+      
+      const updatedTasks = [...currentTasks, newTask];
       await saveTasks(updatedTasks);
       return true;
     } catch (error) {
       Alert.alert(STRINGS.COMMON.ERROR, STRINGS.TASK_FORM.SAVE_ERROR);
       return false;
     }
-  }, [tasks, saveTasks]);
+  }, [saveTasks]); 
 
   const updateTaskStatus = useCallback(async (taskId: string, newStatus: TaskStatus) => {
     try {
-      const updatedTasks = tasks.map((task) =>
+      const storedTasks = await AsyncStorage.getItem(STORAGE_KEY);
+      const currentTasks = storedTasks ? JSON.parse(storedTasks) : [];
+      
+      const updatedTasks = currentTasks.map((task: Task) =>
         task.id === taskId ? { ...task, status: newStatus } : task
       );
       await saveTasks(updatedTasks);
     } catch (error) {
       Alert.alert(STRINGS.COMMON.ERROR, STRINGS.ERRORS.UPDATE_STATUS);
     }
-  }, [tasks, saveTasks]);
+  }, [saveTasks]);
 
   const deleteTask = useCallback(async (taskId: string) => {
     try {
-      const updatedTasks = tasks.filter((task) => task.id !== taskId);
+      const storedTasks = await AsyncStorage.getItem(STORAGE_KEY);
+      const currentTasks = storedTasks ? JSON.parse(storedTasks) : [];
+      
+      const updatedTasks = currentTasks.filter((task: Task) => task.id !== taskId);
       await saveTasks(updatedTasks);
     } catch (error) {
       Alert.alert(STRINGS.COMMON.ERROR, STRINGS.ERRORS.DELETE_TASK);
     }
-  }, [tasks, saveTasks]);
+  }, [saveTasks]); 
 
   const confirmDeleteTask = useCallback((taskId: string) => {
     Alert.alert(

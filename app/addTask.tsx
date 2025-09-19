@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { Alert, Keyboard, ScrollView, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -7,11 +7,12 @@ import { Button } from "@/app/components/Button";
 import { DateTimePickerComponent } from "@/app/components/DateTimePicker";
 import { FormInput } from "@/app/components/FormInput";
 import { STRINGS } from "@/constants/strings";
+import { SPACING } from "@/constants/styles";
 import { useTaskForm } from "@/hooks/useTaskForm";
 import { useTasks } from "@/hooks/useTasks";
 import { commonStyles } from "@/styles/common";
 
-export default function AddTaskScreen() {
+const AddTaskScreen = memo(() => {
     const router = useRouter();
     const { addTask } = useTasks();
     const {
@@ -33,7 +34,7 @@ export default function AddTaskScreen() {
         formatDateTime,
     } = useTaskForm();
 
-    const handleSaveTask = async () => {
+    const handleSaveTask = useCallback(async () => {
         if (!validateForm()) return;
 
         const newTask = getTaskData();
@@ -43,30 +44,38 @@ export default function AddTaskScreen() {
             router.back();
             Alert.alert(STRINGS.COMMON.SUCCESS, STRINGS.TASK_FORM.SAVE_SUCCESS);
         }
-    };
+    }, [validateForm, getTaskData, addTask, router]);
 
-    const toggleDatePicker = () => {
+    const toggleDatePicker = useCallback(() => {
         setShowDatePicker((prev) => !prev);
         setShowTimePicker(false);
-    };
+    }, [setShowDatePicker, setShowTimePicker]);
 
-    const toggleTimePicker = () => {
+    const toggleTimePicker = useCallback(() => {
         setShowTimePicker((prev) => !prev);
         setShowDatePicker(false);
-    };
+    }, [setShowTimePicker, setShowDatePicker]);
+
+    const handleDismissKeyboard = useCallback(() => {
+        Keyboard.dismiss();
+    }, []);
 
     return (
         <SafeAreaView style={commonStyles.container}>
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <ScrollView style={commonStyles.container} keyboardShouldPersistTaps="handled">
+            <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
+                <ScrollView 
+                    style={commonStyles.container} 
+                    keyboardShouldPersistTaps="handled"
+                    showsVerticalScrollIndicator={false}
+                >
                     <View style={commonStyles.form}>
-                        <FormInput
-                            label={STRINGS.TASK_FORM.TITLE}
-                            value={title}
-                            onChangeText={setTitle}
-                            placeholder="Enter task title"
-                            error={errors.title}
-                            required
+                        <FormInput 
+                            label={STRINGS.TASK_FORM.TITLE} 
+                            value={title} 
+                            onChangeText={setTitle} 
+                            placeholder="Enter task title" 
+                            error={errors.title} 
+                            required 
                         />
 
                         <FormInput
@@ -80,13 +89,13 @@ export default function AddTaskScreen() {
                             required
                         />
 
-                        <FormInput
-                            label={STRINGS.TASK_FORM.ADDRESS}
-                            value={address}
-                            onChangeText={setAddress}
-                            placeholder="Enter address"
-                            error={errors.address}
-                            required
+                        <FormInput 
+                            label={STRINGS.TASK_FORM.ADDRESS} 
+                            value={address} 
+                            onChangeText={setAddress} 
+                            placeholder="Enter address" 
+                            error={errors.address} 
+                            required 
                         />
 
                         <DateTimePickerComponent
@@ -106,17 +115,20 @@ export default function AddTaskScreen() {
                             formatDateTime={formatDateTime}
                         />
 
-                        <Button
-                            title={STRINGS.COMMON.SAVE}
-                            onPress={handleSaveTask}
-                            variant="primary"
-                            size="large"
-                            style={{ marginTop: 20 }}
+                        <Button 
+                            title={STRINGS.COMMON.SAVE} 
+                            onPress={handleSaveTask} 
+                            variant="primary" 
+                            size="large" 
+                            style={{ marginTop: SPACING.P5 }} 
                         />
                     </View>
                 </ScrollView>
             </TouchableWithoutFeedback>
         </SafeAreaView>
     );
-}
+});
 
+AddTaskScreen.displayName = 'AddTaskScreen';
+
+export default AddTaskScreen;

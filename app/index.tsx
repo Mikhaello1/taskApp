@@ -1,5 +1,5 @@
 import { useFocusEffect } from "expo-router";
-import React, { useCallback, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -13,9 +13,9 @@ import { useTaskSorting } from "@/hooks/useTaskSorting";
 import { commonStyles } from "@/styles/common";
 import { Task } from "@/types";
 
-export default function TaskListScreen() {
+const TaskListScreen = memo(() => {
     const [sortModalVisible, setSortModalVisible] = useState(false);
-    
+
     const { tasks, loadTasks, updateTaskStatus, confirmDeleteTask } = useTasks();
     const { sortBy, setSortBy, sortedTasks } = useTaskSorting(tasks);
 
@@ -26,40 +26,57 @@ export default function TaskListScreen() {
         }, [loadTasks])
     );
 
-    const renderTaskItem = ({ item }: { item: Task }) => (
+    const handleSortPress = useCallback(() => {
+        setSortModalVisible(true);
+    }, []);
+
+    const handleSortClose = useCallback(() => {
+        setSortModalVisible(false);
+    }, []);
+
+    const renderTaskItem = useCallback(({ item }: { item: Task }) => (
         <TaskItem 
             item={item} 
             onUpdateStatus={updateTaskStatus} 
             onDelete={confirmDeleteTask} 
         />
-    );
+    ), [updateTaskStatus, confirmDeleteTask]);
+
+    const keyExtractor = useCallback((item: Task) => item.id, []);
+
+    const ListEmptyComponent = useCallback(() => (
+        <EmptyList 
+            title={STRINGS.EMPTY_LIST.TITLE} 
+            subtitle={STRINGS.EMPTY_LIST.SUBTITLE} 
+        />
+    ), []);
 
     return (
         <SafeAreaView style={commonStyles.safeArea}>
             <Header 
                 title={STRINGS.HEADER.TITLE} 
-                onSortPress={() => setSortModalVisible(true)} 
+                onSortPress={handleSortPress} 
             />
 
             <FlatList
                 data={sortedTasks}
                 renderItem={renderTaskItem}
-                keyExtractor={(item) => item.id}
+                keyExtractor={keyExtractor}
                 contentContainerStyle={commonStyles.listContainer}
-                ListEmptyComponent={
-                    <EmptyList 
-                        title={STRINGS.EMPTY_LIST.TITLE} 
-                        subtitle={STRINGS.EMPTY_LIST.SUBTITLE} 
-                    />
-                }
+                ListEmptyComponent={ListEmptyComponent}
+                showsVerticalScrollIndicator={false}
             />
 
             <SortModal 
                 visible={sortModalVisible} 
-                onClose={() => setSortModalVisible(false)} 
+                onClose={handleSortClose} 
                 sortBy={sortBy} 
                 onSortChange={setSortBy} 
             />
         </SafeAreaView>
     );
-}
+});
+
+TaskListScreen.displayName = 'TaskListScreen';
+
+export default TaskListScreen;

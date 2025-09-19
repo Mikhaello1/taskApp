@@ -47,13 +47,7 @@ export const useTaskForm = (): UseTaskFormReturn => {
         if (!address.trim()) newErrors.address = STRINGS.TASK_FORM.ADDRESS_REQUIRED;
 
         // Validate date and time combination
-        const combinedDateTime = new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            time.getHours(),
-            time.getMinutes()
-        );
+        const combinedDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
 
         if (!combinedDateTime || combinedDateTime < new Date()) {
             newErrors.dateTime = STRINGS.TASK_FORM.DATE_TIME_REQUIRED;
@@ -64,13 +58,7 @@ export const useTaskForm = (): UseTaskFormReturn => {
     };
 
     const getTaskData = (): Task => {
-        const combinedDateTime = new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate(),
-            time.getHours(),
-            time.getMinutes()
-        );
+        const combinedDateTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
 
         return {
             id: Date.now().toString(),
@@ -84,10 +72,8 @@ export const useTaskForm = (): UseTaskFormReturn => {
     };
 
     const formatDate = (date: Date): string => date.toLocaleDateString();
-    const formatTime = (time: Date): string => 
-        time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    const formatDateTime = (date: Date, time: Date): string => 
-        `${formatDate(date)} ${formatTime(time)}`;
+    const formatTime = (time: Date): string => time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const formatDateTime = (date: Date, time: Date): string => `${formatDate(date)} ${formatTime(time)}`;
 
     const resetForm = () => {
         setTitle("");
