@@ -3,11 +3,11 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-import { getStatusColor } from "@/app/utils/statusColors";
 import { STRINGS } from "@/constants/strings";
 import { COLORS } from "@/constants/styles";
 import { commonStyles } from "@/styles/common";
 import { Task, TaskStatus } from "@/types";
+import { getStatusColor } from "@/utils/statusColors";
 
 interface TaskItemProps {
     item: Task;

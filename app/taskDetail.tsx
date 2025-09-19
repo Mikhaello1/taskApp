@@ -4,10 +4,10 @@ import React from "react";
 import { Alert, Linking, Platform, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { getStatusColor } from "@/app/utils/statusColors";
 import { STRINGS } from "@/constants/strings";
 import { COLORS } from "@/constants/styles";
 import { commonStyles } from "@/styles/common";
+import { getStatusColor } from "@/utils/statusColors";
 
 export default function TaskDetailScreen() {
     const { task } = useLocalSearchParams();
@@ -22,7 +22,7 @@ export default function TaskDetailScreen() {
         );
     }
 
-    /**
+    /*
      * Opens the device's default maps app with the task's address
      * Uses platform-specific URL schemes for iOS and Android
      */

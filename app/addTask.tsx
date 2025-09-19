@@ -3,8 +3,8 @@ import React, { memo, useCallback } from "react";
 import { Alert, Keyboard, ScrollView, TouchableWithoutFeedback, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { Button } from "@/app/components/Button";
-import { DateTimePickerComponent } from "@/app/components/DateTimePicker";
+import { Button } from "@/app/components/ui/Button";
+import { DateTimePickerComponent } from "@/app/components/ui/DateTimePicker";
 import { FormInput } from "@/app/components/FormInput";
 import { STRINGS } from "@/constants/strings";
 import { SPACING } from "@/constants/styles";
