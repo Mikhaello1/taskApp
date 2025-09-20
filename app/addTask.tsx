@@ -5,7 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Button } from "@/app/components/ui/Button";
 import { DateTimePickerComponent } from "@/app/components/ui/DateTimePicker";
-import { FormInput } from "@/app/components/FormInput";
+import { FormInput } from "@/app/components/ui/FormInput";
 import { STRINGS } from "@/constants/strings";
 import { SPACING } from "@/constants/styles";
 import { useTaskForm } from "@/hooks/useTaskForm";
